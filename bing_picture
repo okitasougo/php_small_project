@@ -1,0 +1,26 @@
+//可以获取bing上的壁纸
+<?php
+/**
+ * Created by PhpStorm.
+ * User: 孟倩
+ * Date: 2016/9/30
+ * Time: 21:01
+ */
+    $str=file_get_contents('http://cn.bing.com/HPImageArchive.aspx?idx=0&n=1');
+    if(preg_match("/<url>(.+?)<\/url>/ies",$str,$matches)){
+        $imgurl='http://cn.bing.com'.$matches[1];
+    }
+    if($imgurl){
+        header('Content-Type: image/JPEG');
+        @ob_end_clean();
+        @readfile($imgurl);
+       // @flush();
+        //@ob_flush();
+        $img=file_get_contents("http://localhost/bingpicture/natsume.php");
+        $ret=@file_put_contents('abc.jpg',$img);
+        exit();
+    }else{
+        exit('error');
+    }
+    //一个以前写的小东西
+?>
